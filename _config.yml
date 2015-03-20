@@ -1,0 +1,12 @@
+# Site settings
+title: blog.rosander.ninja
+email: bryan@rosander.ninja
+description: > # this means to ignore newlines until "baseurl:"
+  blog.rosander.ninja
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "http://blog.rosander.ninja" # the base hostname & protocol for your site
+twitter_username: bryan_rosander
+github_username: brosander 
+
+# Build settings
+markdown: kramdown
