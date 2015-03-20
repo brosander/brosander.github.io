@@ -26,6 +26,8 @@ Copy the [netextender init script][init.d-netextender] into the vm's /etc/init.d
 
 Copy the [netextender default values][default-netextender] into the vm's /etc/default folder.
 
+The above two scripts are courtesy of [moonwatcher's gist][script-source].
+
 Edit /etc/default/netextender and set your vpn info.
 
 Run:
@@ -69,4 +71,5 @@ Now you can use the vpn-on or vpn-off aliases from [vpn.bash][vpn.bash] to enabl
 
 [init.d-netextender]: /attachments/scripts/etc/init.d/netextender
 [default-netextender]: /attachments/scripts/etc/default/netextender
+[script-source]: https://gist.github.com/moonwatcher/5463993
 [vpn.bash]: https://raw.githubusercontent.com/brosander/shell-util-repo/master/vpn.bash
