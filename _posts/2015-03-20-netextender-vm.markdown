@@ -68,5 +68,5 @@ Create a file called .vpn.routes in your home directory and add your desired rou
 Now you can use the vpn-on or vpn-off aliases from [vpn.bash][vpn.bash] to enable or disable your vpn at will!
 
 [init.d-netextender]: /attachments/scripts/etc/init.d/netextender
-[default-netextender]: /attachments/scripts/etc/init.d/netextender
+[default-netextender]: /attachments/scripts/etc/default/netextender
 [vpn.bash]: https://raw.githubusercontent.com/brosander/shell-util-repo/master/vpn.bash
