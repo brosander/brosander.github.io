@@ -1,0 +1,28 @@
+#!/bin/sh
+# defaults for NetExtender Dell VPN Client
+# sourced by /etc/init.d/netextender
+# should be placed in /etc/default/netextender
+ 
+# Enable or disable the daemon
+ENABLE_DAEMON=1
+ 
+# Path to daemon
+DAEMON=/usr/sbin/netExtender
+ 
+# User running the daemon
+USER="root"
+ 
+# Authentication parameters
+# VPN_USER, VPN_PASSWORD, VPN_DOMAIN and VPN_SERVER are mandatory
+VPN_USER="VPN_USER"
+VPN_PASSWORD="VPN_PASSWORD"
+VPN_DOMAIN="VPN_DOMAIN"
+VPN_SERVER="VPN_SERVER"
+ 
+VPN_SERVER_PORT="443"
+ 
+# Default options for daemon
+OPTIONS="--auto-reconnect --mtu 1500 --ppp-sync --dns-only-local"
+ 
+# Extra options to start-stop-daemon
+START_STOP_OPTIONS="--iosched idle --nicelevel 10"

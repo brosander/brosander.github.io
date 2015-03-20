@@ -1,0 +1,77 @@
+#!/bin/sh -e
+### BEGIN INIT INFO
+# Provides:          netextender
+# Required-Start:    $local_fs $remote_fs $network
+# Required-Stop:     $local_fs $remote_fs $network
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start or stop the netextender VPN client.
+### END INIT INFO
+ 
+NAME=netextender
+STOP_TIMEOUT=30
+ 
+export PATH="${PATH:+$PATH:}/sbin"
+ 
+[ -e /etc/default/$NAME ] && . /etc/default/$NAME
+ 
+[ -e $DAEMON ] && DAEMON=/usr/sbin/netExtender
+[ -e $USER ] && USER=root
+[ -e $VPN_SERVER_PORT ] && VPN_SERVER_PORT=4433
+ 
+[ -x $DAEMON ] || exit 0
+ 
+. /lib/lsb/init-functions
+ 
+start_daemon () {
+    if [ $ENABLE_DAEMON != 1 ]; then
+        log_daemon_msg "VPN disabled, see /etc/default/${NAME}"
+    else
+        if [ -e $VPN_USER ] || [ -e $VPN_PASSWORD ] || [ -e $VPN_DOMAIN ] || [ -e $VPN_SERVER ]; then
+            log_daemon_msg "Missing connection parameters, see /etc/default/${NAME}"
+        else
+            start-stop-daemon --start --chuid $USER \
+            $START_STOP_OPTIONS --exec $DAEMON  -- \
+            --username $VPN_USER --password $VPN_PASSWORD --domain $VPN_DOMAIN \
+            $OPTIONS $VPN_SERVER:$VPN_SERVER_PORT&
+        fi
+    fi
+}
+ 
+case "$1" in
+    start)
+        log_daemon_msg "Starting NetExtender VPN client" "$NAME"
+        start_daemon
+        log_end_msg 0
+        ;;
+    stop)
+        log_daemon_msg "Stopping NetExtender VPN client" "$NAME"
+        start-stop-daemon --stop --quiet --exec $DAEMON \
+        --retry $STOP_TIMEOUT --oknodo
+        log_end_msg 0
+        ;;
+    reload)
+        log_daemon_msg "Reloading NetExtender VPN client" "$NAME"
+        start-stop-daemon --stop --quiet \
+            --exec $DAEMON \
+            --oknodo --signal 1
+        log_end_msg 0
+        ;;
+    restart|force-reload)
+        log_daemon_msg "Restarting NetExtender VPN client" "$NAME"
+        start-stop-daemon --stop --quiet \
+            --exec $DAEMON --retry $STOP_TIMEOUT \
+            --oknodo
+        start_daemon
+        log_end_msg 0
+        ;;
+    status)
+        status_of_proc "$DAEMON" "$NAME" && exit 0 || exit $?
+        ;;
+    *)
+        echo "Usage: /etc/init.d/$NAME {start|stop|reload|force-reload|restart|status}"
+        exit 2
+        ;;
+esac
+ 
+exit 0
