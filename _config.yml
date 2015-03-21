@@ -10,5 +10,5 @@ github_username: brosander
 
 # Build settings
 markdown: kramdown
-gem:
- - jekyll-sitemap
+gems:
+  - jekyll-sitemap
