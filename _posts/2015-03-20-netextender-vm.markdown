@@ -2,7 +2,7 @@
 layout: post
 title:  "Sandboxing NetExtender VPN within a Virtual Machine"
 date:   2015-03-20 14:14:09
-categories: jekyll update
+categories: vm vpn 
 ---
 A VPN connection can be really handy for getting onto your home or work network.  We use NetExtender, which seems to do a pretty good job; however, requires root privileges and adds routes defined by the VPN server. (Which isn't under my control.)
 

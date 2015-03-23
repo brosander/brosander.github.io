@@ -2,7 +2,7 @@
 layout: post
 title:  "MongoDB sample data in a Docker container"
 date:   2015-03-20 11:28:09
-categories: jekyll update
+categories: docker mongo 
 ---
 Docker containers are a lightweight alternative to virtual machines.  They allow isolation of different applications so that they don't interfere with each other while avoiding the overhead of running a whole vm.  
 
