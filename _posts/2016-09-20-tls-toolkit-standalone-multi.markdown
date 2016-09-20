@@ -78,6 +78,6 @@ It may prompt you for the key you would like it to use to authenticate but after
 
 ![Success]({{ site.baseurl }}/images/2016-09-16-tls-toolkit-multi-success.png)
 
-Congratulations, you've used a self-signed CA to secure 3 node NiFi cluster in Docker!
+Congratulations, you've used a self-signed CA to secure a 3 node NiFi cluster in Docker!
 
 [nifidownload]:https://nifi.apache.org/download.html
