@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Apache NiFi tls-toolkit single node"
+title:  "Apache NiFi tls-toolkit single node standalone"
 date:   2016-09-19 17:33:09
 categories: tls nifi toolkit
 ---
@@ -13,7 +13,7 @@ The tls-toolkit has two main modes of operation:
 1. Standalone utility in which it will generate a Certificate Authority, issue client and server certificates, and  output nifi.properties files for your nodes.
 2. Client/Server mode in which the CA is a long running porcess listening for requests for certificates from clients.
 
-The following will show a very simple usecase for a secure local nifi instance.
+The following will show a very simple usecase for a secure local NiFi instance.
 
 First, download [Apache NiFi and the NiFi Toolkit archives.][nifidownload]
 
