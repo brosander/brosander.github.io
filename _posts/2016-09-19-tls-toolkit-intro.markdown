@@ -2,7 +2,7 @@
 layout: post
 title:  "Apache NiFi tls-toolkit single node standalone"
 date:   2016-09-19 17:33:09
-categories: tls nifi toolkit
+categories: nifi toolkit tls
 ---
 Configuring TLS for Apache NiFi is a good way to ensure that traffic between users and NiFi as well as between NiFi cluster nodes is secure.  While a good security solution, TLS can be pretty tedious to configure.
 
