@@ -11,7 +11,7 @@ To that end, NiFi now has the tls-toolkit which is intended to make that configu
 The tls-toolkit has two main modes of operation:
 
 1. Standalone utility in which it will generate a Certificate Authority, issue client and server certificates, and  output nifi.properties files for your nodes.
-2. Client/Server mode in which the CA is a long running porcess listening for requests for certificates from clients.
+2. Client/Server mode in which the CA is a long running process listening for requests for certificates from clients.
 
 The following will show a very simple usecase for a secure local NiFi instance.
 
