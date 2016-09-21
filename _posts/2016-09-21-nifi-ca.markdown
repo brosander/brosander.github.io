@@ -4,7 +4,8 @@ title:  "Hortonworks DataFlow 2.0 with Apache NiFi CA in Docker"
 date:   2016-09-21 12:38:00
 categories: nifi toolkit tls
 ---
-Hortonworks DataFlow 2.0 comes with the ability to configure TLS for Apache NiFi through Apache Ambari.
+Hortonworks DataFlow 2.0 comes with the ability to configure TLS for Apache NiFi through Apache Ambari, this is implemented using the tls-toolkit in client/server mode.
+[Previously we used the tls-toolkit in standalone mode to quickly configure a single secure NiFi instance](/nifi/toolkit/tls/2016/09/19/tls-toolkit-intro.html) [as well as a multi-node cluster.](/nifi/toolkit/tls/2016/09/20/tls-toolkit-standalone-multi.html)
 
 To demonstrate this functionality, lets set up a 3 node NiFi secured cluster through Ambari locally in Docker containers.
 
