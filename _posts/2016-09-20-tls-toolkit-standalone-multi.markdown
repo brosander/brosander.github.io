@@ -9,6 +9,7 @@ The Apache NiFi tls-toolkit is an easier way to configure TLS for NiFi.  [Previo
 Now we'll try a slightly more complicated usecase involving multiple secure NiFi nodes inside docker containers.
 
 First, [install docker on your machine.](https://www.docker.com/products/docker)
+Please note that the default docker-machine vm size is too small for this guide.  You should have at least 8 gigs of ram, a few cpus, and 50 gigs of hard drive space allocated to the docker-machine you're using.
 
 Then, download [Apache NiFi and the NiFi Toolkit archives.][nifidownload]
 

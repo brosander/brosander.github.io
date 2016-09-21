@@ -10,6 +10,7 @@ Hortonworks DataFlow 2.0 comes with the ability to configure TLS for Apache NiFi
 To demonstrate this functionality, lets set up a 3 node NiFi secured cluster through Ambari locally in Docker containers.
 
 First, [install docker on your machine.](https://www.docker.com/products/docker)
+Please note that the default docker-machine vm size is too small for this guide.  You should have at least 8 gigs of ram, a few cpus, and 100 gigs of hard drive space allocated to the docker-machine you're using.
 
 Build the Ambari stack:
 {% highlight shell %}
