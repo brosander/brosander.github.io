@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Apache NiFi tls-toolkit multi-node standalone"
+title:  "Apache NiFi tls-toolkit multi-node standalone in Docker"
 date:   2016-09-20 16:51:00
 categories: nifi toolkit tls
 ---
