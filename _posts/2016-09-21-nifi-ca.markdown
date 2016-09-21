@@ -45,7 +45,10 @@ Visit <http://ambari:8080> in the browser using the SOCKS proxy
 2. Launch Installation Wizard
 3. Name your cluster -> Next
 4. Default versions should be fine -> Next
-5. For target hosts enter: centos6[1-3].ambari
+5. For target hosts enter: 
+    ```
+    centos6[1-3].ambari
+    ```
 6. Select manual registration radio -> Next
 7. Verify hosts are green -> Next
 8. Deselect Storm and Kafka for the purposes of this tutorial -> Next
