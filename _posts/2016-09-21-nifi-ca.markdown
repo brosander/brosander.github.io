@@ -1,0 +1,86 @@
+---
+layout: post
+title:  "Hortonworks DataFlow 2.0 with Apache NiFi CA in Docker"
+date:   2016-09-21 12:38:00
+categories: nifi toolkit tls
+---
+Hortonworks DataFlow 2.0 comes with the ability to configure TLS for Apache NiFi through Apache Ambari.
+
+To demonstrate this functionality, lets set up a 3 node NiFi secured cluster through Ambari locally in Docker containers.
+
+First, [install docker on your machine.](https://www.docker.com/products/docker)
+
+Build the Ambari stack:
+{% highlight shell %}
+mkdir toolkit-demo-3/
+cd toolkit-demo-3/
+git clone https://github.com/brosander/dev-dockerfiles.git
+dev-dockerfiles/ambari/server/centos6/buildStack.sh http://public-repo-1.hortonworks.com/ambari/centos6/2.x/updates/2.4.0.1/ambari.repo
+{% endhighlight %}
+
+Generate an ssh key for use talking to the gateway and Ambari:
+{% highlight shell %}
+mkdir ambari-ssh-keys
+ssh-keygen -t rsa -b 4096 -f ambari-ssh-keys/id_rsa
+{% endhighlight %}
+
+Run the Ambari stack and install HDF mpack:
+{% highlight shell %}
+wget -P mpack http://public-repo-1.hortonworks.com/HDF/centos6/2.x/updates/2.0.0.0/tars/hdf_ambari_mp/hdf-ambari-mpack-2.0.0.0-579.tar.gz
+dev-dockerfiles/ambari/server/centos6/runStack.sh -m "`pwd`/mpack/" -p "`pwd`/ambari-ssh-keys/id_rsa.pub" -n 3 -a -g
+{% endhighlight %}
+
+SSH into the gateway at port 2001 and forward local port 1025 for use as a SOCKS proxy (this ip will be where docker exposes the port which may vary based on environment):
+{% highlight shell %}
+ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ambari-ssh-keys/id_rsa -p 2001 -D 1025 root@192.168.99.100
+{% endhighlight %}
+
+Configure your browser to use the ssh connection as a SOCKS proxy (for Firefox this is Settings -> Advanced -> Network -> Connection Settings).  I prefer to use Chrome as my main browser so I use Firefox as my "Docker Browser".
+![Success]({{ site.baseurl }}/images/2016-09-16-tls-toolkit-multi-socks.png)
+
+Visit <http://ambari:8080> in the browser using the SOCKS proxy
+
+1. Login to Ambari (default admin/admin)
+2. Launch Installation Wizard
+3. Name your cluster -> Next
+4. Default versions should be fine -> Next
+5. For target hosts enter: centos6[1-3].ambari
+6. Select manual registration radio -> Next
+7. Verify hosts are green -> Next
+8. Deselect Storm and Kafka for the purposes of this tutorial -> Next
+9. Click the + by NiFi twice to put it on all 3 hosts -> Next
+10. Put NiFi Certificate Authority on centos61.ambari (uncheck wherever it currently is) -> Next
+11. On Ambari Metrics tab, enter a Grafana Password, switch to NiFi tab
+12. Expand "Advanced nifi-ambari-config", enter "Sensitive property values encryption password"
+13. Expand Advanced nifi-ambari-ssl-config
+14. Enter "CN=admin, OU=NIFI" (without quotes) into "Initial Admin Identity"
+15. Select "Enable SSL?", "Clients need to authenticate?" checkboxes
+16. Enter NiFi CA Token value
+17. Enter the below xml into "Node Identities"
+18. Next
+19. Deploy
+
+Node Identities xml:
+{% highlight xml %}
+<property name="Node Identity 1">CN=centos61.ambari, OU=NIFI</property>
+<property name="Node Identity 2">CN=centos62.ambari, OU=NIFI</property>
+<property name="Node Identity 3">CN=centos63.ambari, OU=NIFI</property>
+{% endhighlight %}
+
+Wait for the install to finish, at this point you should have a running cluster.
+
+Generate your admin client certificate (if you get permissions errors during the docker-run, consider running build.sh passing your uid and gid in):
+{% highlight shell %}
+dev-dockerfiles/nifi-toolkit/ubuntu/build.sh
+docker run -ti --net ambari -v "`pwd`:/opt/toolkit-output" --rm nifi-toolkit tls-toolkit.sh client -c centos61.ambari -D 'CN=admin, OU=NIFI' -p 10443 -T pkcs12 -t YOUR_CA_TOKEN
+{% endhighlight %}
+
+Import the nifi-cert.pem into your browser as a trusted CA.
+
+Import The keystore.pkcs12 client certificate file into your browser as a client cert using the keyStorePassword in the generated config.json file
+
+Now you should be able to use the NiFi web ui links in Ambari to access your NiFi instances.
+
+Congratulations, you've used NiFi CA to secure a 3 node HDF cluster in Docker using Ambari!
+
+[nifidownload]:https://nifi.apache.org/download.html
