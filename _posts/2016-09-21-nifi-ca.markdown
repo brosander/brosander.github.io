@@ -70,7 +70,7 @@ Node Identities xml:
 
 Wait for the install to finish, at this point you should have a running cluster.
 
-Generate your admin client certificate (if you get permissions errors during the docker-run, consider running build.sh passing your uid and gid in):
+Generate your admin client certificate, subsituting the NiFi CA Token you entered on step 16 for YOUR_CA_TOKEN (if you get permissions errors during the docker-run, consider running build.sh passing your uid and gid in):
 {% highlight shell %}
 dev-dockerfiles/nifi-toolkit/ubuntu/build.sh
 docker run -ti --net ambari -v "`pwd`:/opt/toolkit-output" --rm nifi-toolkit tls-toolkit.sh client -c centos61.ambari -D 'CN=admin, OU=NIFI' -p 10443 -T pkcs12 -t YOUR_CA_TOKEN
