@@ -24,6 +24,8 @@ First, download the [Apache NiFi archive.][nifidownload]
 
 Then, download the [ParseEvtxSample flow.][template]
 
+Use the following commands to prepare a demo workspace:
+
 {% highlight shell %}
 mkdir parse-evtx-demo/
 cd parse-evtx-demo/
