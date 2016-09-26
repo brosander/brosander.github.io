@@ -62,7 +62,7 @@ SSH into the gateway at port 2001 and forward local port 1025 for use as a SOCKS
 ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i nifi-ssh-keys/id_rsa -p 2001 -D 1025 root@192.168.99.100
 {% endhighlight %}
 
-Configure your browser to use the ssh connection as a SOCKS proxy (for Firefox this is Settings -> Advanced -> Network -> Connection Settings)
+Configure your browser to use the ssh connection as a SOCKS proxy (for Firefox this is Settings -> Advanced -> Network -> Connection Settings). I prefer to use Chrome as my main browser so I use Firefox as my "Docker Browser".
 ![Success]({{ site.baseurl }}/images/2016-09-16-tls-toolkit-multi-socks.png)
 
 Import the nifi-cert.pem into your browser as a trusted CA.
