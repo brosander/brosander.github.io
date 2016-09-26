@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Parsing evtx files with Apache NiFi"
-date:   2016-09-26 12:38:00
+date:   2016-09-26 15:40:00
 categories: nifi windows eventlog
 ---
 Windows Event Logs are stored and exported in the [evtx format][1].  This makes them difficult to work with in a programmatic fashion, especially outside the Windows ecosystem.  In order to facilitate the processing of Windows event data in Apache NiFi, a processor capable of parsing evtx files has been created.
